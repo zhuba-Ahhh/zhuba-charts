@@ -14,7 +14,7 @@ export function createLog({ domain, base = Math.E, ...rest }) {
   scale.nice = () => {
     domain = nice(domain, {
       floor: (x) => base ** Math.floor(log(x, base)),
-      ceil: (x) => base ** Math.ceil(log(x, base)),
+      ceil: (x) => base ** Math.ceil(log(x, base))
     });
     linear = createLinear({ domain: domain.map(transform), ...rest });
   };

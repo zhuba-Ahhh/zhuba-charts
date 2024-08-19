@@ -3,13 +3,19 @@ export const sports = [
   { genre: 'Strategy', sold: 115 },
   { genre: 'Action', sold: 120 },
   { genre: 'Shooter', sold: 350 },
-  { genre: 'Other', sold: 150 },
+  { genre: 'Other', sold: 150 }
 ];
 
 export const negative = [
-  { a: 'A', b: -28 }, { a: 'B', b: 55 }, { a: 'C', b: -33 },
-  { a: 'D', b: 91 }, { a: 'E', b: 81 }, { a: 'F', b: 53 },
-  { a: 'G', b: -19 }, { a: 'H', b: 87 }, { a: 'I', b: 52 },
+  { a: 'A', b: -28 },
+  { a: 'B', b: 55 },
+  { a: 'C', b: -33 },
+  { a: 'D', b: 91 },
+  { a: 'E', b: 81 },
+  { a: 'F', b: 53 },
+  { a: 'G', b: -19 },
+  { a: 'H', b: 87 },
+  { a: 'I', b: 52 }
 ];
 
 export const rainfall = [
@@ -28,7 +34,7 @@ export const rainfall = [
   { city: 'Berlin', month: 'May', rainfall: 52.6 },
   { city: 'Berlin', month: 'Jun.', rainfall: 35.5 },
   { city: 'Berlin', month: 'Jul.', rainfall: 37.4 },
-  { city: 'Berlin', month: 'Aug.', rainfall: 42.4 },
+  { city: 'Berlin', month: 'Aug.', rainfall: 42.4 }
 ];
 
 export const profit = [
@@ -44,7 +50,7 @@ export const profit = [
   { month: 'Oct.', profit: -299867, start: 1750462, end: 1450595 },
   { month: 'Nov.', profit: 607365, start: 1450595, end: 2057960 },
   { month: 'Dec.', profit: 1106986, start: 2057960, end: 3164946 },
-  { month: 'Total', start: 0, end: 3164946 },
+  { month: 'Total', start: 0, end: 3164946 }
 ];
 
 function year(string) {
@@ -62,7 +68,7 @@ export const line = [
   { year: year('1996'), value: 6 },
   { year: year('1997'), value: 7 },
   { year: year('1998'), value: 9 },
-  { year: year('1999'), value: 13 },
+  { year: year('1999'), value: 13 }
 ];
 
 export const temperatures = [
@@ -89,7 +95,7 @@ export const temperatures = [
   { month: 'Nov', city: 'Tokyo', temperature: 13.9 },
   { month: 'Nov', city: 'London', temperature: 6.6 },
   { month: 'Dec', city: 'Tokyo', temperature: 9.6 },
-  { month: 'Dec', city: 'London', temperature: 4.8 },
+  { month: 'Dec', city: 'London', temperature: 4.8 }
 ];
 
 export const users = [
@@ -112,7 +118,7 @@ export const users = [
   { item: 'Sales', user: 'a', score: 60 },
   { item: 'Sales', user: 'b', score: 40 },
   { item: 'UX', user: 'a', score: 50 },
-  { item: 'UX', user: 'b', score: 60 },
+  { item: 'UX', user: 'b', score: 60 }
 ];
 
 export const countries = [
@@ -143,7 +149,7 @@ export const countries = [
   { country: 'Asia', year: '1900', value: 5268 },
   { country: 'Asia', year: '1950', value: 4400 },
   { country: 'Asia', year: '1999', value: 3634 },
-  { country: 'Asia', year: '2050', value: 947 },
+  { country: 'Asia', year: '2050', value: 947 }
 ];
 
 export const heatmap = [
@@ -196,7 +202,7 @@ export const heatmap = [
   { x: 9, y: 1, color: 114 },
   { x: 9, y: 2, color: 31 },
   { x: 9, y: 3, color: 48 },
-  { x: 9, y: 4, color: 91 },
+  { x: 9, y: 4, color: 91 }
 ];
 
 export const treemap = [
@@ -205,141 +211,141 @@ export const treemap = [
     x: 0,
     y: 0.5283018867924528,
     x1: 0.47384890478319175,
-    y1: 0,
+    y1: 0
   },
   {
     name: '分类 2',
     x: 0,
     y: 1,
     x1: 0.47384890478319175,
-    y1: 0.5283018867924528,
+    y1: 0.5283018867924528
   },
   {
     name: '分类 3',
     x: 0.47384890478319175,
     y: 0.3440951571792693,
     x1: 0.668719680789417,
-    y1: 0,
+    y1: 0
   },
   {
     name: '分类 4',
     x: 0.668719680789417,
     y: 0.3440951571792693,
     x1: 0.8505990717285606,
-    y1: 0,
+    y1: 0
   },
   {
     name: '分类 5',
     x: 0.8505990717285606,
     y: 0.3440951571792693,
     x1: 1,
-    y1: 0,
+    y1: 0
   },
   {
     name: '分类 6',
     x: 0.47384890478319175,
     y: 0.5649957519116398,
     x1: 0.6660964203431794,
-    y1: 0.3440951571792693,
+    y1: 0.3440951571792693
   },
   {
     name: '分类 7',
     x: 0.6660964203431794,
     y: 0.5649957519116398,
     x1: 0.8482256456105361,
-    y1: 0.3440951571792693,
+    y1: 0.3440951571792693
   },
   {
     name: '分类 8',
     x: 0.8482256456105361,
     y: 0.5649957519116398,
     x1: 1,
-    y1: 0.3440951571792693,
+    y1: 0.3440951571792693
   },
   {
     name: '分类 9',
     x: 0.47384890478319175,
     y: 0.7749978027129171,
     x1: 0.6824595929257935,
-    y1: 0.5649957519116398,
+    y1: 0.5649957519116398
   },
   {
     name: '分类 10',
     x: 0.47384890478319175,
     y: 0.9035704868769644,
     x1: 0.6824595929257935,
-    y1: 0.7749978027129171,
+    y1: 0.7749978027129171
   },
   {
     name: '分类 11',
     x: 0.47384890478319175,
     y: 0.9999999999999999,
     x1: 0.6824595929257935,
-    y1: 0.9035704868769644,
+    y1: 0.9035704868769644
   },
   {
     name: '分类 12',
     x: 0.6824595929257935,
     y: 0.7268905367988936,
     x1: 0.7929084301689957,
-    y1: 0.5649957519116398,
+    y1: 0.5649957519116398
   },
   {
     name: '分类 13',
     x: 0.7929084301689957,
     y: 0.7268905367988936,
     x1: 0.9033572674121979,
-    y1: 0.5649957519116398,
+    y1: 0.5649957519116398
   },
   {
     name: '分类 14',
     x: 0.9033572674121979,
     y: 0.7268905367988936,
     x1: 0.9999999999999999,
-    y1: 0.5649957519116398,
+    y1: 0.5649957519116398
   },
   {
     name: '分类 15',
     x: 0.6824595929257935,
     y: 0.8179270245325957,
     x1: 0.8788763395696326,
-    y1: 0.7268905367988936,
+    y1: 0.7268905367988936
   },
   {
     name: '分类 16',
     x: 0.6824595929257935,
     y: 0.9089635122662978,
     x1: 0.8788763395696326,
-    y1: 0.8179270245325957,
+    y1: 0.8179270245325957
   },
   {
     name: '分类 17',
     x: 0.6824595929257935,
     y: 0.9999999999999999,
     x1: 0.8788763395696326,
-    y1: 0.9089635122662978,
+    y1: 0.9089635122662978
   },
   {
     name: '分类 18',
     x: 0.8788763395696326,
     y: 0.8376105894479908,
     x1: 1,
-    y1: 0.7268905367988936,
+    y1: 0.7268905367988936
   },
   {
     name: '分类 19',
     x: 0.8788763395696326,
     y: 0.9409493052538148,
     x1: 1,
-    y1: 0.8376105894479908,
+    y1: 0.8376105894479908
   },
   {
     name: '分类 20',
     x: 0.8788763395696326,
     y: 1,
     x1: 1,
-    y1: 0.9409493052538148,
-  },
+    y1: 0.9409493052538148
+  }
 ];
 
 export const facet = [
@@ -358,5 +364,5 @@ export const facet = [
   { city: 'Berlin', month: 'May', rainfall: 52.6, type: 'b' },
   { city: 'Berlin', month: 'Jun.', rainfall: 35.5, type: 'b' },
   { city: 'Berlin', month: 'Jul.', rainfall: 37.4, type: 'b' },
-  { city: 'Berlin', month: 'Aug.', rainfall: 42.4, type: 'b' },
+  { city: 'Berlin', month: 'Aug.', rainfall: 42.4, type: 'b' }
 ];

@@ -15,7 +15,7 @@ export function inferScales(channels, options) {
       domain: inferScaleDomain(type, channel, o),
       range: inferScaleRange(type, channel, o),
       label: inferScaleLabel(type, channel, o),
-      type,
+      type
     };
   }
   return scales;
@@ -104,7 +104,8 @@ function inferScaleRange(type, { name }, { range }) {
 
 function inferScaleOptions(type, { name }, { padding, interpolate, margin }) {
   switch (type) {
-    case 'linear': case 'log':
+    case 'linear':
+    case 'log':
       if (interpolate) return { interpolate };
       return { interpolate: name === 'color' ? interpolateColor : interpolateNumber };
     case 'band':

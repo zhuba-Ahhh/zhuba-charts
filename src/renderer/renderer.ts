@@ -2,14 +2,18 @@ import { createContext } from './context';
 import { line, circle, text, rect, path } from './shape';
 import { restore, save, scale, translate, rotate } from './transform';
 
-export function createRenderer(width, height, {
-  line: drawLine = line,
-  circle: drawCircle = circle,
-  text: drawText = text,
-  rect: drawRect = rect,
-  path: drawPath = path,
-  context: intensifyContext = (d) => d,
-} = {}) {
+export function createRenderer(
+  width,
+  height,
+  {
+    line: drawLine = line,
+    circle: drawCircle = circle,
+    text: drawText = text,
+    rect: drawRect = rect,
+    path: drawPath = path,
+    context: intensifyContext = (d) => d
+  } = {}
+) {
   const context = intensifyContext(createContext(width, height));
 
   return {
@@ -24,6 +28,6 @@ export function createRenderer(width, height, {
     rotate: (...args) => rotate(context, ...args),
     translate: (...args) => translate(context, ...args),
     node: () => context.node,
-    group: () => context.group,
+    group: () => context.group
   };
 }

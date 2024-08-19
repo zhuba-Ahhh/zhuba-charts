@@ -1,8 +1,7 @@
 export function computeFlexViews(box, node) {
   const { type, children, flex = children.map(() => 1), padding = 40 } = node;
-  const [mainStart, mainSize, crossSize, crossStart] = type === 'col'
-    ? ['y', 'height', 'width', 'x']
-    : ['x', 'width', 'height', 'y'];
+  const [mainStart, mainSize, crossSize, crossStart] =
+    type === 'col' ? ['y', 'height', 'width', 'x'] : ['x', 'width', 'height', 'y'];
 
   const sum = flex.reduce((total, value) => total + value);
   const totalSize = box[mainSize] - padding * (children.length - 1);
@@ -14,7 +13,7 @@ export function computeFlexViews(box, node) {
       [mainStart]: next,
       [mainSize]: sizes[i],
       [crossStart]: box[crossStart],
-      [crossSize]: box[crossSize],
+      [crossSize]: box[crossSize]
     });
   }
   return childrenViews;

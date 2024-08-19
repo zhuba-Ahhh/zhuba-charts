@@ -5,9 +5,7 @@ export function createSymmetryY() {
     const { x: X } = values;
     const series = X ? Array.from(group(index, (i) => X[i]).values()) : [index];
     const newValues = Object.fromEntries(
-      ['y1', 'y']
-        .filter((key) => values[key])
-        .map((key) => [key, new Array(index.length)]),
+      ['y1', 'y'].filter((key) => values[key]).map((key) => [key, new Array(index.length)])
     );
 
     const M = new Array(series.length);
@@ -31,8 +29,8 @@ export function createSymmetryY() {
       index,
       values: {
         ...values,
-        ...newValues,
-      },
+        ...newValues
+      }
     };
   };
 }

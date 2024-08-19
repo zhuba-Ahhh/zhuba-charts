@@ -9,6 +9,7 @@
   "include": [
     "./vite.config.mts",
     "./src/**/*.ts",
-    "./__tests__/**/*.ts", "__tests__/guide/utils.ts",
+    "./__tests__/**/*.ts",
+    "__tests__/guide/utils.ts"
   ]
 }

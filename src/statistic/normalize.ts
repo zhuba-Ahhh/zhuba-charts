@@ -5,9 +5,7 @@ export function createNormalizeY() {
     const { x: X } = values;
     const series = X ? Array.from(group(index, (i) => X[i]).values()) : [index];
     const newValues = Object.fromEntries(
-      ['y1', 'y']
-        .filter((key) => values[key])
-        .map((key) => [key, new Array(index.length)]),
+      ['y1', 'y'].filter((key) => values[key]).map((key) => [key, new Array(index.length)])
     );
     for (const I of series) {
       const Y = I.flatMap((i) => Object.keys(newValues).map((key) => values[key][i]));
@@ -22,8 +20,8 @@ export function createNormalizeY() {
       index,
       values: {
         ...values,
-        ...newValues,
-      },
+        ...newValues
+      }
     };
   };
 }

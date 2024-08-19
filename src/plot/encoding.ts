@@ -1,10 +1,10 @@
 import { firstOf, map } from '../utils';
 import { categoricalColors } from './theme';
 
-export function inferEncodings(type, data, encodings) {
-  const typedEncodings = map(encodings, (encoding, key) => ({
+export function inferEncodings(type: any, data: any, encodings: any) {
+  const typedEncodings = map(encodings, (encoding: any, key: any) => ({
     type: inferType(data, encoding, key),
-    value: encoding,
+    value: encoding
   }));
 
   switch (type) {
@@ -29,13 +29,13 @@ export function inferEncodings(type, data, encodings) {
   return typedEncodings;
 }
 
-export function valueOf(data, { type, value }) {
+export function valueOf(data: any[], { type, value }: unknown) {
   if (type === 'transform') return data.map(value);
   if (type === 'value') return data.map(() => value);
-  return data.map((d) => d[value]);
+  return data.map((d: { [x: string]: any }) => d[value]);
 }
 
-function inferType(data, encoding, name) {
+function inferType(data: string | any[], encoding: string | number, name: any) {
   if (typeof encoding === 'function') return 'transform';
   if (typeof encoding === 'string') {
     if (data.length && firstOf(data)[encoding] !== undefined) return 'field';
@@ -44,7 +44,7 @@ function inferType(data, encoding, name) {
   return 'value';
 }
 
-function isStyle(type) {
+function isStyle(type: string) {
   return type === 'fill' || type === 'stroke';
 }
 
@@ -82,7 +82,7 @@ function maybeGroup({ fill, stroke, z, ...rest }) {
   return { fill, stroke, z, ...rest };
 }
 
-function maybeField(encoding) {
+function maybeField(encoding: { type: string }) {
   if (encoding === undefined || encoding.type !== 'field') return undefined;
   return encoding;
 }

@@ -76,9 +76,7 @@ export function max(array, accessor) {
 }
 
 export function mean(array, accessor = identity) {
-  return array
-    .map(accessor)
-    .reduce((sum, v) => sum + v) / array.length;
+  return array.map(accessor).reduce((sum, v) => sum + v) / array.length;
 }
 
 export function median(array, accessor = identity) {

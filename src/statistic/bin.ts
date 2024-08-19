@@ -8,11 +8,7 @@ function bin(values, count = 10, accessor = identity) {
   const niceMax = ceil(maxValue, step);
   const niceStep = tickStep(niceMin, niceMax, count);
   const thresholds = ticks(niceMin, niceMax, count);
-  return Array.from(new Set([
-    floor(niceMin, niceStep),
-    ...thresholds,
-    ceil(niceMax, niceStep),
-  ]));
+  return Array.from(new Set([floor(niceMin, niceStep), ...thresholds, ceil(niceMax, niceStep)]));
 }
 
 export function createBinX({ count = 10, channel, aggregate = (values) => values.length } = {}) {
@@ -27,17 +23,23 @@ export function createBinX({ count = 10, channel, aggregate = (values) => values
     return {
       index: filtered,
       values: Object.fromEntries([
-        ...keys.map((key) => [key, I.map((i) => {
-          if (!groups.has(i)) return undefined;
-          return values[key][firstOf(groups.get(i))];
-        })]),
-        [channel, I.map((i) => {
-          if (!groups.has(i)) return 0;
-          return aggregate(groups.get(i).map((index) => values[index]));
-        })],
+        ...keys.map((key) => [
+          key,
+          I.map((i) => {
+            if (!groups.has(i)) return undefined;
+            return values[key][firstOf(groups.get(i))];
+          })
+        ]),
+        [
+          channel,
+          I.map((i) => {
+            if (!groups.has(i)) return 0;
+            return aggregate(groups.get(i).map((index) => values[index]));
+          })
+        ],
         ['x', thresholds.slice(0, n - 1)],
-        ['x1', thresholds.slice(1, n)],
-      ]),
+        ['x1', thresholds.slice(1, n)]
+      ])
     };
   };
 }

@@ -25,7 +25,10 @@ export function plot(root) {
         guides: g = {},
         coordinates: c = [],
         transforms = [],
-        paddingLeft, paddingRight, paddingBottom, paddingTop,
+        paddingLeft,
+        paddingRight,
+        paddingBottom,
+        paddingTop,
         ...geometry
       } = options;
       assignDefined(scales, s);
@@ -45,8 +48,14 @@ function plotView({
   guides: guidesOptions,
   coordinates: coordinateOptions,
   geometries: geometriesOptions,
-  width, height, x, y,
-  paddingLeft = 45, paddingRight = 45, paddingBottom = 45, paddingTop = 65,
+  width,
+  height,
+  x,
+  y,
+  paddingLeft = 45,
+  paddingRight = 45,
+  paddingBottom = 45,
+  paddingTop = 65
 }) {
   const geometries = geometriesOptions.map(initialize);
   const channels = geometries.map((d) => d.channels);
@@ -62,7 +71,7 @@ function plotView({
     y: y + paddingTop,
     width: width - paddingLeft - paddingRight,
     height: height - paddingTop - paddingBottom,
-    transforms,
+    transforms
   });
 
   for (const [key, guide] of Object.entries(guides)) {
@@ -78,7 +87,10 @@ function plotView({
 
 function isChartNode(type) {
   switch (type) {
-    case 'layer': case 'col': case 'row': return false;
+    case 'layer':
+    case 'col':
+    case 'row':
+      return false;
     default:
       return true;
   }
@@ -89,8 +101,14 @@ function flow(root) {
     if (isChartNode(type)) return;
     if (!children || children.length === 0) return;
     const keyDescriptors = [
-      'o:encodings', 'o:scales', 'o:guides', 'o:styles',
-      'a:coordinates', 'a:statistics', 'a:transforms', 'a:data',
+      'o:encodings',
+      'o:scales',
+      'o:guides',
+      'o:styles',
+      'a:coordinates',
+      'a:statistics',
+      'a:transforms',
+      'a:data'
     ];
     for (const child of children) {
       for (const descriptor of keyDescriptors) {

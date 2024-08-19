@@ -12,7 +12,7 @@ export function rect(context, attributes) {
     width: Math.abs(width),
     height: Math.abs(height),
     x: width > 0 ? x : x + width,
-    y: height > 0 ? y : y + height,
+    y: height > 0 ? y : y + height
   });
 }
 

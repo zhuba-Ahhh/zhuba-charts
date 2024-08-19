@@ -9,7 +9,7 @@ import {
   createQuantile,
   createQuantize,
   createThreshold,
-  createTime,
+  createTime
 } from '../scale';
 import { axisX, axisY, legendRamp, legendSwatches } from '../guide';
 import { cartesian, transpose, polar } from '../coordinate';
@@ -35,7 +35,7 @@ export function create(options) {
     const facet = () => {};
     facet.channels = () => ({
       x: { name: 'x', optional: true },
-      y: { name: 'y', optional: true },
+      y: { name: 'y', optional: true }
     });
     return facet;
   }
@@ -69,7 +69,7 @@ export function create(options) {
   if (type === 'legendSwatches') return createGuide(legendSwatches, rest);
   if (type === 'legendRamp') return createGuide(legendRamp, rest);
 
-  throw new Error(`Unknown node type: ${options.type}`);
+  throw new Error(`any node type: ${options.type}`);
 }
 
 function createGuide(guide, options) {

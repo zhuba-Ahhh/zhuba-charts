@@ -11,6 +11,6 @@ export function createContext(width, height) {
 
   return {
     node: svg,
-    group: g,
+    group: g
   };
 }

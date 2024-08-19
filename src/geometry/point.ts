@@ -4,13 +4,20 @@ import { circle } from './shape';
 import { channelStyles } from './style';
 
 const channels = createChannels({
-  r: createChannel({ name: 'r' }),
+  r: createChannel({ name: 'r' })
 });
 
-function render(renderer, I, scales, values, directStyles, coordinate) {
+function render(
+  renderer: any,
+  I: Iterable<any> | ArrayLike<any>,
+  scales: any,
+  values: { x: any; y: any; r?: any[] },
+  directStyles: { [x: string]: any; cx: any; cy: any; r: any },
+  coordinate: any
+) {
   const defaults = {
     r: 3,
-    fill: 'none',
+    fill: 'none'
   };
   const { x: X, y: Y, r: R = [] } = values;
   return Array.from(I, (i) => {
@@ -22,7 +29,7 @@ function render(renderer, I, scales, values, directStyles, coordinate) {
       ...channelStyles(i, values),
       cx: X[i],
       cy: Y[i],
-      r,
+      r
     });
   });
 }

@@ -8,13 +8,7 @@ export const categoricalColors = [
   '#945FB9',
   '#FF9845',
   '#1E9493',
-  '#FF99C3',
+  '#FF99C3'
 ];
 
-export const ordinalColors = [
-  '#9DF5CA',
-  '#61DDAA',
-  '#42C090',
-  '#19A576',
-  '#008A5D',
-];
+export const ordinalColors = ['#9DF5CA', '#61DDAA', '#42C090', '#19A576', '#008A5D'];

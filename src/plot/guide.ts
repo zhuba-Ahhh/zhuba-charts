@@ -8,11 +8,14 @@ export function inferGuides(scales, dimensions, options) {
   return {
     ...(dx && xScale && { x: { ...merge(x, xScale), type: 'axisX' } }),
     ...(dy && yScale && { y: { ...merge(y, yScale), type: 'axisY' } }),
-    ...(dc && colorScale && { color: {
-      ...merge(color, colorScale),
-      ...inferPosition(dimensions),
-      type: inferLegendType(colorScale),
-    } }),
+    ...(dc &&
+      colorScale && {
+        color: {
+          ...merge(color, colorScale),
+          ...inferPosition(dimensions),
+          type: inferLegendType(colorScale)
+        }
+      })
   };
 }
 
@@ -22,8 +25,12 @@ function merge(options, { domain, label }) {
 
 function inferLegendType({ type }) {
   switch (type) {
-    case 'linear': case 'log': case 'time':
-    case 'threshold': case 'quantile': case 'quantize':
+    case 'linear':
+    case 'log':
+    case 'time':
+    case 'threshold':
+    case 'quantile':
+    case 'quantize':
       return 'legendRamp';
     default:
       return 'legendSwatches';

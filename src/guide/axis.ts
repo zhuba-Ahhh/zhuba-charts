@@ -12,8 +12,8 @@ export function createAxis(components) {
       formatter = identity,
       tickLength = 5,
       grid = false,
-      tick = true,
-    },
+      tick = true
+    }
   ) => {
     if (domain.length === 0) return;
     const fontSize = 10;

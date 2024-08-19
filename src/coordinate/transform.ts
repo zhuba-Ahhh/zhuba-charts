@@ -1,36 +1,45 @@
-export function transpose() {
+export const transpose = () => {
   return transform('transpose', ([px, py]) => [py, px]);
-}
+};
 
-export function translate(tx = 0, ty = 0) {
+export const translate = (tx = 0, ty = 0) => {
   return transform('translate', ([px, py]) => [px + tx, py + ty]);
-}
+};
 
-export function scale(sx = 1, sy = 1) {
+export const scale = (sx = 1, sy = 1) => {
   return transform('scale', ([px, py]) => [px * sx, py * sy]);
-}
+};
 
-export function reflect() {
+export const reflect = () => {
   return transform('reflect', scale(-1, -1));
-}
+};
 
-export function reflectX() {
+export const reflectX = () => {
   return transform('reflectX', scale(-1, 1));
-}
+};
 
-export function reflectY() {
+export const reflectY = () => {
   return transform('reflectY', scale(1, -1));
-}
+};
 
-export function polar() {
+export const polar = () => {
   return transform('polar', ([theta, radius]) => {
     const x = radius * Math.cos(theta);
     const y = radius * Math.sin(theta);
     return [x, y];
   });
-}
+};
 
-function transform(type, transformer) {
+const transform = (
+  type: string,
+  transformer: {
+    ([px, py]: [any, any]): any[];
+    ([px, py]: [any, any]): any[];
+    ([px, py]: [any, any]): number[];
+    ([theta, radius]: [any, any]): number[];
+    type?: any;
+  }
+) => {
   transformer.type = () => type;
   return transformer;
-}
+};

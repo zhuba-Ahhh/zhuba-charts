@@ -3,12 +3,15 @@ import { computeFacetViews } from './facet';
 import { computeLayerViews } from './layer';
 import { descendants, group } from '../utils';
 
-export function createViews(root, computes = {
-  layer: computeLayerViews,
-  col: computeFlexViews,
-  row: computeFlexViews,
-  facet: computeFacetViews,
-}) {
+export function createViews(
+  root,
+  computes = {
+    layer: computeLayerViews,
+    col: computeFlexViews,
+    row: computeFlexViews,
+    facet: computeFacetViews
+  }
+) {
   const nodes = descendants(root);
   const { width = 640, height = 480, x = 0, y = 0 } = root;
   const rootView = { width, height, x, y };

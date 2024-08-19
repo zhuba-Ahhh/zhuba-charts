@@ -6,13 +6,20 @@ import { createGeometry } from './geometry';
 const channels = createChannels({
   x: createChannel({ name: 'x', scale: 'band', optional: false }),
   z: createChannel({ name: 'z', scale: 'band' }),
-  y1: createChannel({ name: 'y1', optional: false }),
+  y1: createChannel({ name: 'y1', optional: false })
 });
 
-function render(renderer, I, scales, values, directStyles, coordinate) {
+function render(
+  renderer: any,
+  I: Iterable<any> | ArrayLike<any>,
+  scales: { x: any; z: any },
+  values: { x: any; y: any; y1: any; z?: any[] },
+  directStyles: { [x: string]: any; x1: any; y1: any; x2: any; y2: any },
+  coordinate: any
+) {
   const defaults = {
     z: 0,
-    x: 0,
+    x: 0
   };
   const { x, z } = scales;
   const { x: X, y: Y, y1: Y1, z: Z = [] } = values;
@@ -30,7 +37,7 @@ function render(renderer, I, scales, values, directStyles, coordinate) {
       x1,
       y1: Y[i],
       x2: x1 + width,
-      y2: Y1[i],
+      y2: Y1[i]
     });
   });
 }

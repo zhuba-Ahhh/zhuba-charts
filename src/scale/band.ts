@@ -19,6 +19,6 @@ function band({ domain, range, padding, margin = padding }) {
   return {
     step,
     bandWidth,
-    bandRange: new Array(n).fill(0).map(x),
+    bandRange: new Array(n).fill(0).map(x)
   };
 }

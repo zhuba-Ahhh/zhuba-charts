@@ -1,8 +1,4 @@
-export function createChannel({
-  name,
-  optional = true,
-  ...rest
-}) {
+export function createChannel({ name, optional = true, ...rest }) {
   return { name, optional, ...rest };
 }
 
@@ -12,6 +8,6 @@ export function createChannels(options = {}) {
     y: createChannel({ name: 'y', optional: false }),
     stroke: createChannel({ name: 'stroke' }),
     fill: createChannel({ name: 'fill' }),
-    ...options,
+    ...options
   };
 }

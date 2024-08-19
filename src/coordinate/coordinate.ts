@@ -1,9 +1,6 @@
 import { compose } from '../utils';
 
-export function createCoordinate({
-  transforms: coordinates = [],
-  ...canvasOptions
-}) {
+export const createCoordinate = ({ transforms: coordinates = [], ...canvasOptions }) => {
   const transforms = coordinates.flatMap((coordinate) => coordinate(canvasOptions));
   const types = transforms.map((d) => d.type());
   const output = compose(...transforms);
@@ -14,4 +11,4 @@ export function createCoordinate({
   output.center = () => [x + width / 2, y + height / 2];
 
   return output;
-}
+};

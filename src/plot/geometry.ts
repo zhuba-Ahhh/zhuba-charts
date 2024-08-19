@@ -8,7 +8,7 @@ export function initialize({
   encodings: E = {},
   statistics: statisticsOptions = [],
   transforms: transformsOptions = [],
-  styles,
+  styles
 }) {
   // apply transform
   const transform = compose(...transformsOptions.map(create));
@@ -52,6 +52,6 @@ function createChannel(channel, values, encoding = {}) {
   return {
     ...channel,
     ...(type === 'field' && { field: value }),
-    values,
+    values
   };
 }

@@ -15,7 +15,7 @@ export function createStackY() {
     }
     return {
       index,
-      values: { ...values, y: newY, y1: newY1 },
+      values: { ...values, y: newY, y1: newY1 }
     };
   };
 }

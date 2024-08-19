@@ -1,21 +1,34 @@
 import { identity } from '../utils';
 
-export function legendSwatches(renderer, scale, coordinate, {
-  x,
-  y,
-  width = 64,
-  marginLeft = 6,
-  swatchSize = 10,
-  fontSize = 10,
-  formatter = identity,
-  domain,
-  label,
-}) {
+export function legendSwatches(
+  renderer,
+  scale,
+  coordinate,
+  {
+    x,
+    y,
+    width = 64,
+    marginLeft = 6,
+    swatchSize = 10,
+    fontSize = 10,
+    formatter = identity,
+    domain,
+    label
+  }
+) {
   renderer.save();
   renderer.translate(x, y);
 
   if (label) {
-    renderer.text({ text: label, x: 0, y: 0, fontWeight: 'bold', fontSize, textAnchor: 'start', dy: '1em' });
+    renderer.text({
+      text: label,
+      x: 0,
+      y: 0,
+      fontWeight: 'bold',
+      fontSize,
+      textAnchor: 'start',
+      dy: '1em'
+    });
   }
 
   const legendY = label ? swatchSize * 2 : 0;
@@ -29,7 +42,7 @@ export function legendSwatches(renderer, scale, coordinate, {
       width: swatchSize,
       height: swatchSize,
       stroke: color,
-      fill: color,
+      fill: color
     });
     const textX = legendX + marginLeft + swatchSize;
     const textY = legendY + swatchSize;

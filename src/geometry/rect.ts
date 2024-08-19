@@ -5,21 +5,30 @@ import { channelStyles } from './style';
 
 const channels = createChannels({
   x1: createChannel({ name: 'x1', optional: false }),
-  y1: createChannel({ name: 'y1', optional: false }),
+  y1: createChannel({ name: 'y1', optional: false })
 });
 
-function render(renderer, I, scales, values, directStyles, coordinate) {
+function render(
+  renderer: any,
+  I: Iterable<any> | ArrayLike<any>,
+  scales: any,
+  values: { x: any; y: any; x1: any; y1: any },
+  directStyles: { [x: string]: any; x1: any; y1: any; x2: any; y2: any },
+  coordinate: any
+) {
   const defaults = {};
   const { x: X, y: Y, x1: X1, y1: Y1 } = values;
-  return Array.from(I, (i) => shapeRect(renderer, coordinate, {
-    ...defaults,
-    ...directStyles,
-    ...channelStyles(i, values),
-    x1: X[i],
-    y1: Y[i],
-    x2: X1[i],
-    y2: Y1[i],
-  }));
+  return Array.from(I, (i) =>
+    shapeRect(renderer, coordinate, {
+      ...defaults,
+      ...directStyles,
+      ...channelStyles(i, values),
+      x1: X[i],
+      y1: Y[i],
+      x2: X1[i],
+      y2: Y1[i]
+    })
+  );
 }
 
 export const rect = createGeometry(channels, render);

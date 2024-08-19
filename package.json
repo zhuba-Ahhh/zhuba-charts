@@ -23,15 +23,15 @@
   ],
   "scripts": {
     "Publish": "npm run build && npm publish",
-    "dev": "cd playground && npm run dev",
     "build": "rm -rf dist & vite build",
-    "test": "vitest",
     "coverage": "vitest --coverage",
+    "dev": "cd playground && npm run dev",
     "docs:build": "vitepress build docs",
     "docs:dev": "vitepress dev docs",
     "docs:preview": "vitepress preview docs",
     "format": "prettier --write --ignore-unknown .",
-    "lint:es": "eslint \"./**/*.{js,jsx,ts,tsx}\""
+    "lint:es": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
+    "test": "vitest"
   },
   "dependencies": {
     "react": "18.2.0",
