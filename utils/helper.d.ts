@@ -1,0 +1,13 @@
+export declare function identity(x: any): any;
+export declare function compose(...fns: any[]): any;
+export declare function curry(fn: any): (...args: any[]) => any;
+export declare function ceil(n: any, base: any): number;
+export declare function floor(n: any, base: any): number;
+export declare function round(n: any): number;
+export declare function normalize(value: any, start: any, stop: any): number;
+export declare function log(n: any, base: any): number;
+export declare function nice(domain: any, interval: any): any[];
+export declare function map(object: any, transform?: typeof identity): {};
+export declare function assignDefined(target: any, source: any): void;
+export declare function random(a?: number, b?: number): number;
+export declare function defined(d: any): boolean;
