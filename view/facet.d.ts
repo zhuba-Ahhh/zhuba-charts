@@ -1,4 +1,4 @@
-export declare function computeFacetViews(box: any, { data, encodings, padding, paddingLeft, paddingRight, paddingBottom, paddingTop, }: {
+export declare function computeFacetViews(box: any, { data, encodings, padding, paddingLeft, paddingRight, paddingBottom, paddingTop }: {
     data: any;
     encodings?: {} | undefined;
     padding?: number | undefined;

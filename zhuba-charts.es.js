@@ -361,10 +361,7 @@ function createRenderer(width, height, {
     group: () => context.group
   };
 }
-function createCoordinate({
-  transforms: coordinates = [],
-  ...canvasOptions
-}) {
+const createCoordinate = ({ transforms: coordinates = [], ...canvasOptions }) => {
   const transforms = coordinates.flatMap((coordinate2) => coordinate2(canvasOptions));
   const types = transforms.map((d) => d.type());
   const output = compose(...transforms);
@@ -373,42 +370,39 @@ function createCoordinate({
   output.isTranspose = () => types.reduce((is, type) => is ^ type === "transpose", false);
   output.center = () => [x + width / 2, y + height / 2];
   return output;
-}
-function transpose$1() {
+};
+const transpose$1 = () => {
   return transform("transpose", ([px, py]) => [py, px]);
-}
-function translate(tx = 0, ty = 0) {
+};
+const translate = (tx = 0, ty = 0) => {
   return transform("translate", ([px, py]) => [px + tx, py + ty]);
-}
-function scale(sx = 1, sy = 1) {
+};
+const scale = (sx = 1, sy = 1) => {
   return transform("scale", ([px, py]) => [px * sx, py * sy]);
-}
-function reflectX() {
+};
+const reflectX = () => {
   return transform("reflectX", scale(-1, 1));
-}
-function reflectY() {
+};
+const reflectY = () => {
   return transform("reflectY", scale(1, -1));
-}
-function polar$1() {
+};
+const polar$1 = () => {
   return transform("polar", ([theta, radius]) => {
     const x = radius * Math.cos(theta);
     const y = radius * Math.sin(theta);
     return [x, y];
   });
-}
-function transform(type, transformer) {
+};
+const transform = (type, transformer) => {
   transformer.type = () => type;
   return transformer;
-}
-function coordinate$2(transformOptions, canvasOptions) {
+};
+const coordinate$2 = (transformOptions, canvasOptions) => {
   const { x, y, width, height } = canvasOptions;
-  return [
-    scale(width, height),
-    translate(x, y)
-  ];
-}
+  return [scale(width, height), translate(x, y)];
+};
 const cartesian = curry(coordinate$2);
-function coordinate$1(transformOptions, canvasOptions) {
+const coordinate$1 = (transformOptions, canvasOptions) => {
   const { width, height } = canvasOptions;
   const {
     innerRadius = 0,
@@ -430,22 +424,13 @@ function coordinate$1(transformOptions, canvasOptions) {
     scale(0.5, 0.5),
     translate(0.5, 0.5)
   ];
-}
+};
 const polar = curry(coordinate$1);
-function coordinate(transformOptions, canvasOptions) {
-  return [
-    transpose$1(),
-    translate(-0.5, -0.5),
-    reflectX(),
-    translate(0.5, 0.5)
-  ];
-}
+const coordinate = (transformOptions, canvasOptions) => {
+  return [transpose$1(), translate(-0.5, -0.5), reflectX(), translate(0.5, 0.5)];
+};
 const transpose = curry(coordinate);
-function createChannel$1({
-  name,
-  optional = true,
-  ...rest
-}) {
+function createChannel$1({ name, optional = true, ...rest }) {
   return { name, optional, ...rest };
 }
 function createChannels(options = {}) {
@@ -457,27 +442,21 @@ function createChannels(options = {}) {
     ...options
   };
 }
-function channelStyles(index, channels2) {
+const channelStyles = (index, channels2) => {
   const { stroke: S, fill: F } = channels2;
   return {
     ...S && { stroke: S[index] },
     ...F && { fill: F[index] }
   };
-}
-function groupChannelStyles([index], channels2) {
+};
+const groupChannelStyles = ([index], channels2) => {
   return channelStyles(index, channels2);
-}
+};
 function line$2([p0, ...points]) {
-  return [
-    ["M", ...p0],
-    ...points.map((p) => ["L", ...p])
-  ];
+  return [["M", ...p0], ...points.map((p) => ["L", ...p])];
 }
 function area$2(points) {
-  return [
-    ...line$2(points),
-    ["Z"]
-  ];
+  return [...line$2(points), ["Z"]];
 }
 function sector([c, p0, p1, p2, p3]) {
   const r = dist(c, p0);
@@ -499,13 +478,17 @@ function ring$1([c, [r1, r2]]) {
   const p1 = [cx, cy + r2];
   const p2 = [cx, cy + r1];
   const p3 = [cx, cy - r1];
-  return [
-    ...sector([c, p0, p1, p2, p3]),
-    ...sector([c, p1, p0, p3, p2])
-  ];
+  return [...sector([c, p0, p1, p2, p3]), ...sector([c, p1, p0, p3, p2])];
 }
 function ring(renderer, { cx, cy, r1, r2, ...styles }) {
-  const ring2 = renderer.path({ ...styles, d: ring$1([[cx, cy], [r1, r2]]), stroke: "none" });
+  const ring2 = renderer.path({
+    ...styles,
+    d: ring$1([
+      [cx, cy],
+      [r1, r2]
+    ]),
+    stroke: "none"
+  });
   const innerStroke = renderer.circle({ ...styles, fill: "none", r: r1, cx, cy });
   const outerStroke = renderer.circle({ ...styles, fill: "none", r: r2, cx, cy });
   return [innerStroke, ring2, outerStroke];
@@ -515,7 +498,11 @@ function contour(renderer, { points, ...styles }) {
   const mid = end / 2;
   const contour2 = renderer.path({ d: area$2(points), ...styles, stroke: "none" });
   const outerStroke = renderer.path({ d: line$2(points.slice(0, mid)), ...styles, fill: "none" });
-  const innerStroke = renderer.path({ d: line$2(points.slice(mid, end)), ...styles, fill: "none" });
+  const innerStroke = renderer.path({
+    d: line$2(points.slice(mid, end)),
+    ...styles,
+    fill: "none"
+  });
   return [innerStroke, contour2, outerStroke];
 }
 function rect$1(renderer, coordinate2, { x1, y1, x2, y2, ...styles }) {
@@ -571,7 +558,10 @@ function text$1(renderer, coordinate2, { x, y, rotate: rotate2, text: text2, ...
   return textElement;
 }
 function link$1(renderer, coordinate2, { x1, y1, x2, y2, ...styles }) {
-  const [p0, p1] = [[x1, y1], [x2, y2]].map(coordinate2);
+  const [p0, p1] = [
+    [x1, y1],
+    [x2, y2]
+  ].map(coordinate2);
   return renderer.line({ x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1], ...styles });
 }
 function path$1(renderer, coordinate2, attributes) {
@@ -633,15 +623,18 @@ function render$7(renderer, I, scales, values, directStyles, coordinate2) {
   const { x: X, y: Y } = values;
   const width = x.bandWidth();
   const height = y.bandWidth();
-  return Array.from(I, (i) => rect$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...channelStyles(i, values),
-    x1: X[i],
-    y1: Y[i],
-    x2: X[i] + width,
-    y2: Y[i] + height
-  }));
+  return Array.from(
+    I,
+    (i) => rect$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...channelStyles(i, values),
+      x1: X[i],
+      y1: Y[i],
+      x2: X[i] + width,
+      y2: Y[i] + height
+    })
+  );
 }
 const cell = createGeometry(channels$7, render$7);
 const channels$6 = createChannels({
@@ -651,15 +644,18 @@ const channels$6 = createChannels({
 function render$6(renderer, I, scales, values, directStyles, coordinate2) {
   const defaults = {};
   const { x: X, y: Y, x1: X1, y1: Y1 } = values;
-  return Array.from(I, (i) => rect$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...channelStyles(i, values),
-    x1: X[i],
-    y1: Y[i],
-    x2: X1[i],
-    y2: Y1[i]
-  }));
+  return Array.from(
+    I,
+    (i) => rect$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...channelStyles(i, values),
+      x1: X[i],
+      y1: Y[i],
+      x2: X1[i],
+      y2: Y1[i]
+    })
+  );
 }
 const rect = createGeometry(channels$6, render$6);
 const channels$5 = createChannels({
@@ -669,15 +665,18 @@ function render$5(renderer, I, scales, values, directStyles, coordinate2) {
   const defaults = {};
   const { x: X, y: Y, z: Z } = values;
   const series = Z ? group(I, (i) => Z[i]).values() : [I];
-  return Array.from(series, (I2) => line$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...groupChannelStyles(I2, values),
-    X,
-    Y,
-    I: I2,
-    fill: "none"
-  }));
+  return Array.from(
+    series,
+    (I2) => line$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...groupChannelStyles(I2, values),
+      X,
+      Y,
+      I: I2,
+      fill: "none"
+    })
+  );
 }
 const line = createGeometry(channels$5, render$5);
 const channels$4 = createChannels({
@@ -712,16 +711,19 @@ function render$3(renderer, I, scales, values, directStyles, coordinate2) {
   const defaults = {};
   const { x: X, y: Y, z: Z, x1: X1, y1: Y1 } = values;
   const series = Z ? group(I, (i) => Z[i]).values() : [I];
-  return Array.from(series, (I2) => area$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...groupChannelStyles(I2, values),
-    X1: X,
-    Y1: Y,
-    X2: X1,
-    Y2: Y1,
-    I: I2
-  }));
+  return Array.from(
+    series,
+    (I2) => area$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...groupChannelStyles(I2, values),
+      X1: X,
+      Y1: Y,
+      X2: X1,
+      Y2: Y1,
+      I: I2
+    })
+  );
 }
 const area = createGeometry(channels$3, render$3);
 const channels$2 = createChannels({
@@ -737,16 +739,19 @@ function render$2(renderer, I, scales, values, directStyles, coordinate2) {
     fontWeight: "normal"
   };
   const { x: X, y: Y, text: T, rotate: R = [], fontSize: FS = [], fontWeight: FW = [] } = values;
-  return Array.from(I, (i) => text$1(renderer, coordinate2, {
-    ...directStyles,
-    ...channelStyles(i, values),
-    x: X[i],
-    y: Y[i],
-    rotate: R[i] || defaults.rotate,
-    fontSize: FS[i] || defaults.fontSize,
-    fontWeight: FW[i] || defaults.fontWeight,
-    text: T[i]
-  }));
+  return Array.from(
+    I,
+    (i) => text$1(renderer, coordinate2, {
+      ...directStyles,
+      ...channelStyles(i, values),
+      x: X[i],
+      y: Y[i],
+      rotate: R[i] || defaults.rotate,
+      fontSize: FS[i] || defaults.fontSize,
+      fontWeight: FW[i] || defaults.fontWeight,
+      text: T[i]
+    })
+  );
 }
 const text = createGeometry(channels$2, render$2);
 const channels$1 = createChannels({
@@ -756,15 +761,18 @@ const channels$1 = createChannels({
 function render$1(renderer, I, scales, values, directStyles, coordinate2) {
   const defaults = {};
   const { x: X, y: Y, x1: X1, y1: Y1 } = values;
-  return Array.from(I, (i) => link$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...channelStyles(i, values),
-    x1: X[i],
-    y1: Y[i],
-    x2: X1[i],
-    y2: Y1[i]
-  }));
+  return Array.from(
+    I,
+    (i) => link$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...channelStyles(i, values),
+      x1: X[i],
+      y1: Y[i],
+      x2: X1[i],
+      y2: Y1[i]
+    })
+  );
 }
 const link = createGeometry(channels$1, render$1);
 const channels = {
@@ -775,12 +783,15 @@ const channels = {
 function render(renderer, I, scales, values, directStyles, coordinate2) {
   const defaults = {};
   const { d: D } = values;
-  return Array.from(I, (i) => path$1(renderer, coordinate2, {
-    ...defaults,
-    ...directStyles,
-    ...channelStyles(i, values),
-    d: D[i]
-  }));
+  return Array.from(
+    I,
+    (i) => path$1(renderer, coordinate2, {
+      ...defaults,
+      ...directStyles,
+      ...channelStyles(i, values),
+      d: D[i]
+    })
+  );
 }
 const path = createGeometry(channels, render);
 function interpolateNumber(t, start, stop) {
@@ -970,11 +981,24 @@ function ticksLeft(renderer, ticks2, { tickLength, fontSize }) {
     const x2 = x - tickLength;
     const y2 = y;
     renderer.line({ x1: x, y1: y, x2, y2, stroke: "currentColor", class: "tick" });
-    renderer.text({ text: text2, fontSize, x: x2, y, textAnchor: "end", dy: "0.5em", dx: "-0.5em", class: "text" });
+    renderer.text({
+      text: text2,
+      fontSize,
+      x: x2,
+      y,
+      textAnchor: "end",
+      dy: "0.5em",
+      dx: "-0.5em",
+      class: "text"
+    });
   }
 }
 function ticksCircular(renderer, ticks2, { tickLength, fontSize, center }) {
-  for (const { x, y, text: text2 } of unique(ticks2, (d) => d.x, (d) => d.y)) {
+  for (const { x, y, text: text2 } of unique(
+    ticks2,
+    (d) => d.x,
+    (d) => d.y
+  )) {
     const { tickRotation, textRotation } = rotationOf(center, [x, y]);
     const [x2, y2] = [0, tickLength];
     const dy = textRotation === 0 ? "1.2em" : "-0.5em";
@@ -1130,7 +1154,15 @@ function legendSwatches(renderer, scale2, coordinate2, {
   renderer.save();
   renderer.translate(x, y);
   if (label) {
-    renderer.text({ text: label, x: 0, y: 0, fontWeight: "bold", fontSize, textAnchor: "start", dy: "1em" });
+    renderer.text({
+      text: label,
+      x: 0,
+      y: 0,
+      fontWeight: "bold",
+      fontSize,
+      textAnchor: "start",
+      dy: "1em"
+    });
   }
   const legendY = label ? swatchSize * 2 : 0;
   for (const [i, t] of Object.entries(domain)) {
@@ -1165,7 +1197,15 @@ function legendRamp(renderer, scale2, coordinate2, {
   renderer.save();
   renderer.translate(x, y);
   if (label) {
-    renderer.text({ text: label, x: 0, y: 0, fontWeight: "bold", fontSize, textAnchor: "start", dy: "1em" });
+    renderer.text({
+      text: label,
+      x: 0,
+      y: 0,
+      fontWeight: "bold",
+      fontSize,
+      textAnchor: "start",
+      dy: "1em"
+    });
   }
   const legendY = label ? height * 2 : 0;
   const domainValues = [firstOf(domain), lastOf(domain)];
@@ -1175,11 +1215,7 @@ function legendRamp(renderer, scale2, coordinate2, {
     renderer.line({ x1: i, y1: legendY, x2: i, y2: legendY + height, stroke });
   }
   const position = createLinear({ domain: domainValues, range: [0, width] });
-  const values = scale2.thresholds ? [
-    domainValues[0],
-    ...scale2.thresholds(),
-    domainValues[1]
-  ] : position.ticks(tickCount);
+  const values = scale2.thresholds ? [domainValues[0], ...scale2.thresholds(), domainValues[1]] : position.ticks(tickCount);
   const ticks2 = values.map((d) => ({
     x: position(d),
     y: legendY,
@@ -1272,11 +1308,7 @@ function bin(values, count = 10, accessor = identity) {
   const niceMax = ceil(maxValue, step);
   const niceStep = tickStep(niceMin, niceMax, count);
   const thresholds = ticks(niceMin, niceMax, count);
-  return Array.from(/* @__PURE__ */ new Set([
-    floor(niceMin, niceStep),
-    ...thresholds,
-    ceil(niceMax, niceStep)
-  ]));
+  return Array.from(/* @__PURE__ */ new Set([floor(niceMin, niceStep), ...thresholds, ceil(niceMax, niceStep)]));
 }
 function createBinX({ count = 10, channel, aggregate = (values) => values.length } = {}) {
   return ({ index, values }) => {
@@ -1290,14 +1322,20 @@ function createBinX({ count = 10, channel, aggregate = (values) => values.length
     return {
       index: filtered,
       values: Object.fromEntries([
-        ...keys.map((key) => [key, I.map((i) => {
-          if (!groups.has(i)) return void 0;
-          return values[key][firstOf(groups.get(i))];
-        })]),
-        [channel, I.map((i) => {
-          if (!groups.has(i)) return 0;
-          return aggregate(groups.get(i).map((index2) => values[index2]));
-        })],
+        ...keys.map((key) => [
+          key,
+          I.map((i) => {
+            if (!groups.has(i)) return void 0;
+            return values[key][firstOf(groups.get(i))];
+          })
+        ]),
+        [
+          channel,
+          I.map((i) => {
+            if (!groups.has(i)) return 0;
+            return aggregate(groups.get(i).map((index2) => values[index2]));
+          })
+        ],
         ["x", thresholds.slice(0, n - 1)],
         ["x1", thresholds.slice(1, n)]
       ])
@@ -1346,7 +1384,7 @@ function create(options) {
   if (type === "axisY") return createGuide(axisY, rest);
   if (type === "legendSwatches") return createGuide(legendSwatches, rest);
   if (type === "legendRamp") return createGuide(legendRamp, rest);
-  throw new Error(`Unknown node type: ${options.type}`);
+  throw new Error(`any node type: ${options.type}`);
 }
 function createGuide(guide, options) {
   return (renderer, scale2, coordinate2) => guide(renderer, scale2, coordinate2, options);
@@ -1369,13 +1407,7 @@ const categoricalColors = [
   "#1E9493",
   "#FF99C3"
 ];
-const ordinalColors = [
-  "#9DF5CA",
-  "#61DDAA",
-  "#42C090",
-  "#19A576",
-  "#008A5D"
-];
+const ordinalColors = ["#9DF5CA", "#61DDAA", "#42C090", "#19A576", "#008A5D"];
 function inferScales(channels2, options) {
   const scaleChannels = group(channels2.flatMap(Object.entries), ([name]) => scaleName(name));
   const scales = {};
@@ -1658,11 +1690,13 @@ function inferGuides(scales, dimensions, options) {
   return {
     ...dx && xScale && { x: { ...merge(x, xScale), type: "axisX" } },
     ...dy && yScale && { y: { ...merge(y, yScale), type: "axisY" } },
-    ...dc && colorScale && { color: {
-      ...merge(color2, colorScale),
-      ...inferPosition(dimensions),
-      type: inferLegendType(colorScale)
-    } }
+    ...dc && colorScale && {
+      color: {
+        ...merge(color2, colorScale),
+        ...inferPosition(dimensions),
+        type: inferLegendType(colorScale)
+      }
+    }
   };
 }
 function merge(options, { domain, label }) {

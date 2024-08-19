@@ -1,4 +1,4 @@
-export declare function initialize({ data, type, encodings: E, statistics: statisticsOptions, transforms: transformsOptions, styles, }: {
+export declare function initialize({ data, type, encodings: E, statistics: statisticsOptions, transforms: transformsOptions, styles }: {
     data: any;
     type: any;
     encodings?: {} | undefined;

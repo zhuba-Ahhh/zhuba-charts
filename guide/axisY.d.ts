@@ -1,4 +1,4 @@
-export declare const axisY: (renderer: any, scale: any, coordinate: any, { domain, label, tickCount, formatter, tickLength, grid, tick, }: {
+export declare const axisY: (renderer: any, scale: any, coordinate: any, { domain, label, tickCount, formatter, tickLength, grid, tick }: {
     domain: any;
     label: any;
     tickCount?: number | undefined;

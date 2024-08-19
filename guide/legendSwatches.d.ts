@@ -1,6 +1,6 @@
 import { identity } from '../utils';
 
-export declare function legendSwatches(renderer: any, scale: any, coordinate: any, { x, y, width, marginLeft, swatchSize, fontSize, formatter, domain, label, }: {
+export declare function legendSwatches(renderer: any, scale: any, coordinate: any, { x, y, width, marginLeft, swatchSize, fontSize, formatter, domain, label }: {
     x: any;
     y: any;
     width?: number | undefined;

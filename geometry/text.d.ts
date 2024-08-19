@@ -1,4 +1,12 @@
 export declare const text: {
-    (renderer: any, I: any, scales: any, values: any, styles: any, coordinate: any): any;
-    channels(): any;
+    (renderer: any, I: any, scales: {
+        [x: string]: {
+            bandWidth: any;
+        };
+    }, values: {
+        [x: string]: any;
+    }, styles: any, coordinate: any): any[];
+    channels(): ArrayLike<any> | {
+        [s: string]: any;
+    };
 };

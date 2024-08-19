@@ -1,6 +1,6 @@
 import { line, circle, text, rect, path } from './shape';
 
-export declare function createRenderer(width: any, height: any, { line: drawLine, circle: drawCircle, text: drawText, rect: drawRect, path: drawPath, context: intensifyContext, }?: {
+export declare function createRenderer(width: any, height: any, { line: drawLine, circle: drawCircle, text: drawText, rect: drawRect, path: drawPath, context: intensifyContext }?: {
     line?: typeof line | undefined;
     circle?: typeof circle | undefined;
     text?: typeof text | undefined;

@@ -1,6 +1,6 @@
 import { identity } from '../utils';
 
-export declare function legendRamp(renderer: any, scale: any, coordinate: any, { x, y, width, height, domain, tickCount, tickLength, formatter, fontSize, label, }: {
+export declare function legendRamp(renderer: any, scale: any, coordinate: any, { x, y, width, height, domain, tickCount, tickLength, formatter, fontSize, label }: {
     x: any;
     y: any;
     width?: number | undefined;
